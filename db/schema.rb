@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20181122160454) do
+ActiveRecord::Schema.define(version: 20181123145306) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -36,6 +36,15 @@ ActiveRecord::Schema.define(version: 20181122160454) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "user_requirements", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "requirement_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["requirement_id"], name: "index_user_requirements_on_requirement_id"
+    t.index ["user_id"], name: "index_user_requirements_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email_address"
     t.datetime "created_at", null: false
@@ -45,4 +54,6 @@ ActiveRecord::Schema.define(version: 20181122160454) do
 
   add_foreign_key "requirement_cities", "cities"
   add_foreign_key "requirement_cities", "requirements"
+  add_foreign_key "user_requirements", "requirements"
+  add_foreign_key "user_requirements", "users"
 end
