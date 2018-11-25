@@ -1,0 +1,29 @@
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12 col-md-8 offset-md-2">
+      <h1 class="text-center">Possible city holiday locations</h1>
+      <p class="text-center">Based off your requirements we recommend the following city destinations</p>
+      <h2>Best city options for you</h2>
+      <hr>
+      <ul>
+      <% @top_choices.each do |key, value| %>
+        <li><strong><%= key %>:</strong> <%= value %></li>
+      <% end %>
+      </ul>
+      <h2>How these match up with your requirements</h2>
+      <hr>
+      <% @user.requirements.each do |requirement| %>
+        <h3><%= requirement.name %></h3>
+        <h6><strong>City destinations:</strong></h6>
+        <ul>
+        <% requirement.cities.each do |city| %>
+          <li><%= city.name %></li>
+        <% end %>
+        </ul>
+      <% end %>
+      <%= link_to edit_user_path(@user) do %>
+        <button class="btn btn-primary">Choose different requirements</button>
+      <% end %>
+    </div>
+  </div>
+</div>
