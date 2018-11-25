@@ -1,11 +1,5 @@
 # README
 
-Things you may want to cover:
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
 <h2>About</h2>
 A Ruby on Rails app which suggests cities a user may like based off a selection of requirements.
 
@@ -25,6 +19,8 @@ The user is finally taken through to a third screen which displays suggested cit
 Additional gems used include:
 
 * rspec
+
+* factory_bot_rails
 
 * bootstrap
 
@@ -49,7 +45,7 @@ Additional gems used include:
 The seed file contains the requirements, cities, their associations on the join table, and three 'dummy' users.
 
 <h2>The app and running it</h2>
-The install and seed of the app contains the following associations and records as per the app specs:
+The app's seed file contains the following associations and records in accordance with the project's specifications:
 
 The city requirement associations are as follows:
 
@@ -87,38 +83,50 @@ The homepage of the app on <code>localhost:3000/</code> will take you to the '#n
 
 After a successful '#create' action of the user, the second stage of the app is the '#edit' action for users. A validation which is only enabled on #edit is present to ensure that the user selects at least one requirement.
 
-On the user's successful '#update' action the user will be presented with their user '#show' page. This lists their city requirements and the associated suggested cities.
+On the user's successful '#update' action the user will be presented with their user '#show' page. This lists some simple stats detailing the top recommended cities according their requirements. It also includes a broad list of their city requirements and their associated cities.
 
-As with most projects, there are several ways of implementing the code to solve the project requirements. The future development of the app would help determine what the best approach would be. Given the project spec and requirements, the above approach was chosen as it was not a requirement that users could edit or change their email and job title after the initial sign-up. Creating the user's city requirements through the #edit action was therefore felt to be the cleanest and simplest approach to creating and saving the user's city requirements in the database.
+As with most projects, there are several ways of implementing the code to solve the project requirements. The future development of the app would help determine what the best approach would be. Given the project spec and requirements, the above approach was chosen. Creating the user's city requirements through the #edit action was felt to be the cleanest and simplest approach to creating and saving the user's city requirements in the database.
 
 <h2>Test suite</h2>
 
-Rspec has been used to test the programme. To run all tests, simply run:
+Rspec, capybara and FactoryBot have been used to test the programme. To run specific test files...
 
-<code>rspec</code>
+User model tests:
 
-For a bit more speed, you can navigate to the specific testing folder and run the files individually.
+<code>rspec spec/models/user_spec.rb</code>
+
+User flow feature tests:
+
+<code>rspec spec/features/user_data_entry.rb</code>
 
 <h2>Notes / Thoughts</h2>
 
+There are several ways of coding this project to satisfy the specifications. The best approach would be reliant on knowledge of the future development of the app. A couple of other approaches which could have been taken, include:
+
+* Having all form queries listed on the '#new' action for users, this would also reduce the number of screens / webpages the user would need to navigate.
+
+* Creating a 'wizard' form, where-in the questions for email sign-up and city requirements could be listed on different pages through the #new, #create action for users.
+
+* Creating different routes and controllers altogether which are specific to creating the user-requirements and join table.
+
+* Having a requirements index page where-in a user could select items and the corresponding city results would be filtered.
+
+<h2>Thoughts for future development and present weaknesses</h2>
+
 There is no authentication or login required for users. This means, among other things:
 
-* Any user or visitor to the app can see another user's requirements and their associated cities.
+* Any visitor to the app can see another user's requirements and their associated cities.
 
 * Any user can edit another user's requirements.
 
 * A returning visitor would have to remember their ID and enter it in the url if they wanted to go back and access their results.
 
-* The UI / UX of the app is very basic. If this were to be further developed the frontend would need to be improved.
+Other considerations:
 
-As mentioned, there are several ways of coding this project to the specifications and the best approach would be reliant on knowledge of the future development of the app. A couple of other approaches which could have been taken, include:
+* The UI / UX of the app is very basic. If this were to be further developed the frontend would need to be improved and the user navigation expanded on.
 
-* Having all form queries listed on the '#new' action for users, this would reduce the number of screens / webpages by one.
+Admin panel:
 
-* Creating a 'wizard' form, where-in the questions for email sign-up and city requirements could be listed on different pages through the #new, #create action for users.
+* Creation of a namespaced admin panel to create more requirements and associated cities which user's can select.
 
-<h2>Thoughts for future development</h2>
-
-* Creation of a namespaced admin panel to create more requirements and associated cities which users can select.
-
-* Admin could view all users and all user requirements. So admin could for example collect statistics to understand what the most popular user choices are.
+* Admin could view all users and all user requirements. So the admin could, for example, collect statistics to understand what the most popular user choices are.

@@ -5,7 +5,7 @@
       <p class="text-center">Please select at least one option and choose as many as you like</p>
       <%= simple_form_for @user do |f| %>
         <%= f.association :requirements, as: :check_boxes %>
-        <%= f.button :submit, class: "btn-primary" %>
+        <%= f.button :submit, "Submit", class: "btn-primary" %>
       <% end %>
     </div>
   </div>
