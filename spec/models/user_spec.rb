@@ -22,6 +22,12 @@ RSpec.describe User, type: :model do
       expect(user).to eq(false)
     end
 
+    it 'ensures email address cannot be the same as another record' do
+      user = create(:user)
+      user1 = User.new(email_address: "joe@gmail.com", job_title: "Applications Programmer").save
+      expect(user1).to eq(false)
+    end
+
     it 'should save a user record' do
       user = User.new(email_address: "joe@gmail.com", job_title: "Applications Programmer").save
       expect(user).to eq(true)
